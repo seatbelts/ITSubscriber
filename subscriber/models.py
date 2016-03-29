@@ -26,7 +26,7 @@ class Projecto(models.Model):
 
 class Alumno(models.Model):
     nombre = models.CharField(max_length=255)
-    matricula = models.IntegerField(unique=True, db_index=True)
+    matricula = models.PositiveIntegerField(primary_key=True)
     correo = models.EmailField()
     telefono = models.CharField(max_length=50, null=True)
 
@@ -35,7 +35,7 @@ class Alumno(models.Model):
 
 class Equipo(models.Model):
     nombre = models.CharField(max_length=30)
-    credentials = models.OneToOneField(User)
+    usuario = models.OneToOneField(User)
     lider = models.OneToOneField(Alumno, related_name='lider')
     integrantes = models.ManyToManyField(Alumno, related_name='integrantes')
 
