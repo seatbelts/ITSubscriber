@@ -8,9 +8,9 @@ class EventoSerializer(serializers.ModelSerializer):
         model = Evento
         exclude = ()
 
-class ProjectoSerializer(serializers.ModelSerializer):
+class ProyectoSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Projecto
+        model = Proyecto
         exclude = ()
 
 class AlumnoSerializer(serializers.ModelSerializer):

@@ -4,7 +4,7 @@ from .views import *
 
 router = DefaultRouter()
 router.register(r'eventos', EventoViewSet)
-router.register(r'projectos', ProjectoViewSet)
+router.register(r'proyectos', ProyectoViewSet)
 router.register(r'equipos', EquipoViewSet)
 router.register(r'alumnos', AlumnoViewSet)
 router.register(r'usuarios', UserViewSet)

@@ -9,9 +9,9 @@ class EventoViewSet(ModelViewSet):
     queryset = Evento.objects.all()
     serializer_class = EventoSerializer
 
-class ProjectoViewSet(ModelViewSet):
-    queryset = Projecto.objects.all()
-    serializer_class = ProjectoSerializer
+class ProyectoViewSet(ModelViewSet):
+    queryset = Proyecto.objects.all()
+    serializer_class = ProyectoSerializer
 
 class AlumnoViewSet(ModelViewSet):
     queryset = Alumno.objects.all()

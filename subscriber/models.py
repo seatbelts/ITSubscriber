@@ -14,7 +14,7 @@ class Evento(models.Model):
     def __str__(self):
         return '%s' %self.nombre
 
-class Projecto(models.Model):
+class Proyecto(models.Model):
     nombre = models.CharField(max_length=30)
     descripcion = models.CharField(max_length=255)
     materia = models.CharField(choices=MATERIAS, max_length=5)
