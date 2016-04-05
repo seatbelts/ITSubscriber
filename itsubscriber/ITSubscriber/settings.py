@@ -79,8 +79,17 @@ WSGI_APPLICATION = 'ITSubscriber.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
-import dj_database_url
-DATABASES['default'] =  dj_database_url.config()
+DATABASES = {
+    'default': {
+	'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'its',
+        'USER': 'diego',
+        'PASSWORD': '',
+        'HOST': '',
+        'PORT': '5432',
+    }
+}
+
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
@@ -120,3 +129,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
+import dj_database_url
+DATABASES['default'] =  dj_database_url.config()
