@@ -1,4 +1,5 @@
 from django.conf.urls import url, include
+from rest_framework.authtoken import views
 from rest_framework.routers import DefaultRouter
 from .views import *
 
@@ -9,7 +10,7 @@ router.register(r'equipos', EquipoViewSet)
 router.register(r'alumnos', AlumnoViewSet)
 router.register(r'usuarios', UserViewSet)
 
-
 urlpatterns = [
     url(r'^', include(router.urls)),
+    url(r'^login/', views.obtain_auth_token),
 ]
