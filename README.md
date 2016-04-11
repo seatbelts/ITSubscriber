@@ -7,6 +7,6 @@ Proyecto Integrador 2 API
 - [x] Modelos
 - [x] ModelViewSets
 - [x] Montar en alguna parte
-- [ ] Tests
+- [ ] TestsCases
 - [ ] Motivacion
 - [ ] ...
