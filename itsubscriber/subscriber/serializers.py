@@ -23,6 +23,11 @@ class EquipoSerializer(serializers.ModelSerializer):
         model = Equipo
         exclude = ()
 
+class MateriaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Materia
+        exclude = ()
+
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
 

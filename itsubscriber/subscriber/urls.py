@@ -5,10 +5,11 @@ from .views import *
 
 router = DefaultRouter()
 router.register(r'eventos', EventoViewSet)
-router.register(r'proyectos', ProyectoViewSet)
-router.register(r'equipos', EquipoViewSet)
+router.register(r'proyectos', ProyectoViewSet, base_name='proyecto')
+router.register(r'equipos', EquipoViewSet, base_name='equipo')
 router.register(r'alumnos', AlumnoViewSet)
-router.register(r'usuarios', UserViewSet)
+router.register(r'usuarios', UserViewSet, base_name='usuario')
+router.register(r'materias', MateriaViewSet)
 
 urlpatterns = [
     url(r'^', include(router.urls)),

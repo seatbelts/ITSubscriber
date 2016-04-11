@@ -19,7 +19,7 @@ class Proyecto(models.Model):
     descripcion = models.CharField(max_length=255)
     materia = models.ManyToManyField(Materia)
     evento = models.ForeignKey(Evento, on_delete=models.CASCADE)
-    mesa = models.CharField(max_length=3)
+    mesa = models.CharField(max_length=3, null=True)
 
     def __str__(self):
         return '%s' %self.nombre
