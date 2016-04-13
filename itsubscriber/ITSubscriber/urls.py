@@ -20,4 +20,5 @@ from subscriber import urls
 urlpatterns = [
     url(r'^', include(urls)),
     url(r'^admin/', admin.site.urls),
+    url(r'^docs/', include('rest_framework_swagger.urls')),
 ]

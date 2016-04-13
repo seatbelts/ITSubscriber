@@ -35,9 +35,9 @@ class Alumno(models.Model):
 
 class Equipo(models.Model):
     nombre = models.CharField(max_length=30)
-    usuario = models.OneToOneField(User)
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
     proyecto = models.OneToOneField(Proyecto)
-    lider = models.OneToOneField(Alumno, related_name='lider')
+    lider = models.ForeignKey(Alumno, related_name='lider')
     integrantes = models.ManyToManyField(Alumno, related_name='integrantes')
 
     def __str__(self):
