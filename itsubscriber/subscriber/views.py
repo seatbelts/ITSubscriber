@@ -30,7 +30,7 @@ class ProyectoViewSet(ModelViewSet):
     def get_queryset(self):
         if self.request.user.is_staff:
             return Proyecto.objects.all()
-        return Proyecto.objects.get(equipo__usuario=self.request.user)
+        return Proyecto.objects.filter(equipo__usuario=self.request.user)
 
 class AlumnoViewSet(ModelViewSet):
     queryset = Alumno.objects.all()
@@ -46,7 +46,7 @@ class EquipoViewSet(ModelViewSet):
     def get_queryset(self):
         if self.request.user.is_staff:
             return Equipo.objects.all()
-        return Equipo.objects.get(usuario=self.request.user)
+        return Equipo.objects.filter(usuario=self.request.user)
 
 class MateriaViewSet(ModelViewSet):
     queryset = Materia.objects.all()
@@ -62,4 +62,4 @@ class UserViewSet(ModelViewSet):
     def get_queryset(self):
         if self.request.user.is_staff:
             return User.objects.all()
-        return User.objects.get(id=self.request.user.id)
+        return User.objects.filter(id=self.request.user.id)
