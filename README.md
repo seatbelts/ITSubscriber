@@ -10,3 +10,10 @@ Proyecto Integrador 2 API
 - [ ] TestsCases
 - [ ] Motivacion
 - [ ] ...
+
+
+# Instalacion
+1. Instalar virtualenvwrappper (opcional)
+2. mkvirtualenv --python=/usr/bin/python3 nameOfEnvironment
+3. workon nameOfEnvironment
+4. pip install -r requirements.txt
