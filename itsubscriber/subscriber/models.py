@@ -13,7 +13,7 @@ class Materia(models.Model):
     maestro = models.CharField(max_length=100)
 
     def __str__(self):
-        return '%s' %(self.nombre, self.maestro)
+        return '%s - %s' %(self.nombre, self.maestro)
 
 class Proyecto(models.Model):
     nombre = models.CharField(max_length=30)
