@@ -10,9 +10,10 @@ class Evento(models.Model):
 
 class Materia(models.Model):
     nombre = models.CharField(max_length=100)
+    maestro = models.CharField(max_length=100)
 
     def __str__(self):
-        return '%s' %self.nombre
+        return '%s' %(self.nombre, self.maestro)
 
 class Proyecto(models.Model):
     nombre = models.CharField(max_length=30)
@@ -20,12 +21,14 @@ class Proyecto(models.Model):
     materia = models.ManyToManyField(Materia)
     evento = models.ForeignKey(Evento, on_delete=models.CASCADE)
     mesa = models.CharField(max_length=3, null=True)
+    archivo = models.FileField(null=True)
 
     def __str__(self):
         return '%s' %self.nombre
 
 class Alumno(models.Model):
     nombre = models.CharField(max_length=255)
+    apellidos = models.CharField(max_length=255)
     matricula = models.PositiveIntegerField(primary_key=True)
     correo = models.EmailField()
     telefono = models.CharField(max_length=50, null=True)

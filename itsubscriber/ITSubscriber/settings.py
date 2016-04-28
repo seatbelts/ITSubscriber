@@ -132,5 +132,9 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+SWAGGER_SETTINGS = {
+    "api_key": '092a3e9a908403bf0b53a0a91121506fa68ea682', # An API key
+}
+
 import dj_database_url
-DATABASES['default'] =  dj_database_url.config()
+#DATABASES['default'] =  dj_database_url.config()
