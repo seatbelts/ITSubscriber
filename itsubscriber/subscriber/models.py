@@ -15,13 +15,16 @@ class Materia(models.Model):
     def __str__(self):
         return '%s - %s' %(self.nombre, self.maestro)
 
+def file_name(instance, filename):
+    return '/'.join([instance.evento.nombre, instance.nombre, filename])
+
 class Proyecto(models.Model):
     nombre = models.CharField(max_length=30)
     descripcion = models.CharField(max_length=255)
     materia = models.ManyToManyField(Materia)
     evento = models.ForeignKey(Evento, on_delete=models.CASCADE)
     mesa = models.CharField(max_length=3, null=True)
-    archivo = models.FileField(null=True)
+    archivo = models.FileField(null=True, upload_to=file_name)
 
     def __str__(self):
         return '%s' %self.nombre
