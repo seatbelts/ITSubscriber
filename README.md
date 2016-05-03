@@ -37,3 +37,8 @@ DATABASES['default'] =  dj_database_url.config()
 ```
 
 - Correr migraciones y levantar servidor
+
+# Crear superadmin
+```python
+python manage.py createsuperuser
+```
