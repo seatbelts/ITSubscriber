@@ -1,5 +1,4 @@
 from rest_framework import status, serializers
-from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.authtoken.models import Token
 from rest_framework.permissions import AllowAny
@@ -11,16 +10,19 @@ from .models import *
 from .serializers import *
 from .permissions import *
 
+
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
 def create_auth_token(sender, instance=None, created=False, **kwargs):
     if created:
         Token.objects.create(user=instance)
+
 
 class EventoViewSet(ModelViewSet):
     queryset = Evento.objects.all()
     serializer_class = EventoSerializer
     # authentication_classes = (TokenAuthentication, )
     permission_classes = (EventoPermission, )
+
 
 class ProyectoViewSet(ModelViewSet):
     serializer_class = ProyectoSerializer
@@ -32,11 +34,13 @@ class ProyectoViewSet(ModelViewSet):
             return Proyecto.objects.all()
         return Proyecto.objects.filter(equipo__usuario=self.request.user)
 
+
 class AlumnoViewSet(ModelViewSet):
     queryset = Alumno.objects.all()
     serializer_class = AlumnoSerializer
     # authentication_classes = (TokenAuthentication, )
     permission_classes = (AlumnoPermission, )
+
 
 class EquipoViewSet(ModelViewSet):
     serializer_class = EquipoSerializer
@@ -48,11 +52,18 @@ class EquipoViewSet(ModelViewSet):
             return Equipo.objects.all()
         return Equipo.objects.filter(usuario=self.request.user)
 
+
 class MateriaViewSet(ModelViewSet):
     queryset = Materia.objects.all()
     serializer_class = MateriaSerializer
     # authentication_classes = (TokenAuthentication, )
     permission_classes = (MateriaPermission, )
+
+
+class MaestroViewSet(ModelViewSet):
+    queryset = Maestro.objects.all()
+    serializer_class = MaestroSerializer
+
 
 class UserViewSet(ModelViewSet):
     serializer_class = UserSerializer
@@ -63,24 +74,14 @@ class UserViewSet(ModelViewSet):
             return User.objects.all()
         return User.objects.filter(id=self.request.user.id)
 
-from rest_framework.views import APIView
-from rest_framework import parsers, renderers
-from rest_framework.authtoken.serializers import AuthTokenSerializer
-from django.contrib.auth import get_user_model
-from rest_framework import generics
+
 from rest_framework.generics import CreateAPIView
-
-class ObtainAuthToken(APIView):
-    throttle_classes = ()
-    permission_classes = ()
-    parser_classes = (parsers.FormParser, parsers.MultiPartParser, parsers.JSONParser,)
-    renderer_classes = (renderers.JSONRenderer,)
-    serializer_class = AuthTokenSerializer
-
 
 '''
 Endpoint to create new users
 '''
+
+
 class CreateUserView(CreateAPIView):
     permission_classes = (AllowAny, )
-    serializer_class =  UserSerializer
+    serializer_class = UserSerializer

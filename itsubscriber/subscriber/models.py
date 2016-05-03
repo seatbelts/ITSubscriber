@@ -21,7 +21,7 @@ class PersonalData(models.Model):
         abstract = True
 
 
-class Evento(models.Model):
+class Evento(TimeStampedModel, models.Model ):
     nombre = models.CharField(max_length=30)
     description = models.TextField(blank=True, null=True)
 
@@ -33,7 +33,7 @@ class Materia(models.Model):
     nombre = models.CharField(max_length=100)
 
     def __str__(self):
-        return '%s - Sem %s' % (self.nombre, self.semestre)
+        return '%s' % (self.nombre)
 
 
 class Maestro(PersonalData):

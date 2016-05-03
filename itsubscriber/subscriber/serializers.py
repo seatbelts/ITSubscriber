@@ -28,6 +28,11 @@ class MateriaSerializer(serializers.ModelSerializer):
         model = Materia
         exclude = ()
 
+class MaestroSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Maestro
+        exclude = ()
+
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
 
