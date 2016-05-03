@@ -18,11 +18,15 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from subscriber import urls
+from subscriber.views import ObtainAuthToken
 
 urlpatterns = [
     url(r'^', include(urls)),
     url(r'^admin/', admin.site.urls),
     url(r'^docs/', include('rest_framework_swagger.urls')),
+    # HACK No recuerdo pq habia hecho esto asi en otro proyecto, de rato checamos si sirve o no.
+    # url(r'^token-auth/', ObtainAuthToken.as_view()),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
