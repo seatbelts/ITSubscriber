@@ -1,8 +1,8 @@
-from rest_framework import status
+from rest_framework import status, serializers
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.authtoken.models import Token
-# from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import AllowAny
 from django.contrib.auth.models import User
 from django.conf import settings
 from django.db.models.signals import post_save
@@ -56,7 +56,6 @@ class MateriaViewSet(ModelViewSet):
 
 class UserViewSet(ModelViewSet):
     serializer_class = UserSerializer
-    # authentication_classes = (TokenAuthentication, )
     permission_classes = (UserPermission, )
 
     def get_queryset(self):
@@ -66,8 +65,10 @@ class UserViewSet(ModelViewSet):
 
 from rest_framework.views import APIView
 from rest_framework import parsers, renderers
-from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.serializers import AuthTokenSerializer
+from django.contrib.auth import get_user_model
+from rest_framework import generics
+from rest_framework.generics import CreateAPIView
 
 class ObtainAuthToken(APIView):
     throttle_classes = ()
@@ -75,3 +76,11 @@ class ObtainAuthToken(APIView):
     parser_classes = (parsers.FormParser, parsers.MultiPartParser, parsers.JSONParser,)
     renderer_classes = (renderers.JSONRenderer,)
     serializer_class = AuthTokenSerializer
+
+
+'''
+Endpoint to create new users
+'''
+class CreateUserView(CreateAPIView):
+    permission_classes = (AllowAny, )
+    serializer_class =  UserSerializer

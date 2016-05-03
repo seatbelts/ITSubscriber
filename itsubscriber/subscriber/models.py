@@ -9,6 +9,8 @@ def file_name(instance, filename):
 '''
 Abstract model
 '''
+
+
 class PersonalData(models.Model):
     nombre = models.CharField(max_length=255)
     apellidos = models.CharField(max_length=255)
@@ -27,18 +29,18 @@ class Evento(models.Model):
         return '%s' % self.nombre
 
 
+class Materia(models.Model):
+    nombre = models.CharField(max_length=100)
+
+    def __str__(self):
+        return '%s - Sem %s' % (self.nombre, self.semestre)
+
+
 class Maestro(PersonalData):
+    materia = models.ForeignKey(Materia, null=True)
 
     def __str__(self):
         return self.nombre
-
-
-class Materia(models.Model):
-    nombre = models.CharField(max_length=100)
-    maestro = models.ForeignKey(Maestro)
-
-    def __str__(self):
-        return '%s - %s' % (self.nombre, self.maestro)
 
 
 class Proyecto(models.Model):

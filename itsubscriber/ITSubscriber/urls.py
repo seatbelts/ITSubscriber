@@ -22,10 +22,10 @@ from subscriber.views import ObtainAuthToken
 
 urlpatterns = [
     url(r'^', include(urls)),
-    url(r'^admin/', admin.site.urls),
+    url(r'^admin/', include(admin.site.urls)),
     url(r'^docs/', include('rest_framework_swagger.urls')),
     # HACK No recuerdo pq habia hecho esto asi en otro proyecto, de rato checamos si sirve o no.
-    # url(r'^token-auth/', ObtainAuthToken.as_view()),
+    url(r'^token-auth/', ObtainAuthToken.as_view()),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
 
