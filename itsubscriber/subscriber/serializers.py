@@ -33,6 +33,11 @@ class MaestroSerializer(serializers.ModelSerializer):
         model = Maestro
         exclude = ()
 
+class CategoriasSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Categorias
+        exclude = ()
+
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
 

@@ -42,6 +42,11 @@ class Maestro(PersonalData):
     def __str__(self):
         return self.nombre
 
+class Categorias(models.Model):
+    nombre = models.CharField(max_length=30)
+
+    def __str__(self):
+        return '%s' % self.nombre
 
 class Proyecto(models.Model):
     nombre = models.CharField(max_length=30)
@@ -50,6 +55,7 @@ class Proyecto(models.Model):
     evento = models.ForeignKey(Evento, on_delete=models.CASCADE)
     mesa = models.CharField(max_length=3, null=True)
     archivo = models.FileField(null=True, upload_to=file_name)
+    categoria = models.ForeignKey(Categorias, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return '%s' % self.nombre

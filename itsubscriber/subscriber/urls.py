@@ -11,10 +11,11 @@ router.register(r'alumnos', AlumnoViewSet)
 router.register(r'usuarios', UserViewSet, base_name='usuario')
 router.register(r'materias', MateriaViewSet)
 router.register(r'maestros', MaestroViewSet)
+router.register(r'categorias', CategoriasViewSet)
 # router.register(r'register', CreateUserView.as_view(), base_name='register')
 
 urlpatterns = [
-    url(r'^', include(router.urls)),
+    url(r'^v1/', include(router.urls)),
     url(r'^login/', views.obtain_auth_token),
     url(r'^register/', CreateUserView.as_view()),
 ]

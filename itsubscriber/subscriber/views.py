@@ -64,6 +64,9 @@ class MaestroViewSet(ModelViewSet):
     queryset = Maestro.objects.all()
     serializer_class = MaestroSerializer
 
+class CategoriasViewSet(ModelViewSet):
+    queryset = Categorias.objects.all()
+    serializer_class = CategoriasSerializer
 
 class UserViewSet(ModelViewSet):
     serializer_class = UserSerializer
