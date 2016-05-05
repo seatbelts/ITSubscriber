@@ -3,42 +3,42 @@ from django.contrib.auth.models import User
 from django.conf import settings
 from .models import *
 
-class EventoSerializer(serializers.ModelSerializer):
+class EventoSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Evento
-        exclude = ()
+        fields = ('url', 'id', 'nombre', 'description')
 
-class ProyectoSerializer(serializers.ModelSerializer):
+class ProyectoSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Proyecto
-        exclude = ()
+        fields = ('url', 'id', 'nombre', 'description', 'mesa', 'archivo', 'evento', 'categoria', 'materia',)
 
-class AlumnoSerializer(serializers.ModelSerializer):
+class AlumnoSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Alumno
-        exclude = ()
+        fields = ('url', 'nombre', 'apellidos', 'correo', 'telefono', 'user', 'matricula')
 
-class EquipoSerializer(serializers.ModelSerializer):
+class EquipoSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Equipo
-        exclude = ()
+        fields = ('url', 'id', 'nombre', 'usuario', 'proyecto', 'lider', 'integrantes')
 
-class MateriaSerializer(serializers.ModelSerializer):
+class MateriaSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Materia
-        exclude = ()
+        fields = ('url', 'id', 'nombre')
 
-class MaestroSerializer(serializers.ModelSerializer):
+class MaestroSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Maestro
-        exclude = ()
+        fields = ('url', 'id', 'nombre', 'apellidos', 'correo', 'telefono', 'materia' )
 
-class CategoriasSerializer(serializers.ModelSerializer):
+class CategoriasSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Categorias
-        exclude = ()
+        fields = ('url', 'id', 'nombre')
 
-class UserSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.HyperlinkedModelSerializer):
     password = serializers.CharField(write_only=True)
 
     def create(self, validated_data):
