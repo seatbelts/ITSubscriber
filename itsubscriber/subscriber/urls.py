@@ -16,6 +16,8 @@ router.register(r'categorias', CategoriasViewSet)
 
 urlpatterns = [
     url(r'^v1/', include(router.urls)),
-    url(r'^login/', views.obtain_auth_token),
+    url(r'^login/', ObtainAuthToken.as_view()),
     url(r'^register/', CreateUserView.as_view()),
 ]
+
+

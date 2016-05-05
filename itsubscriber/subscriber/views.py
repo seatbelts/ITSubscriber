@@ -85,6 +85,8 @@ from rest_framework.response import Response
 '''
 Endpoint to create new users
 '''
+
+
 class CreateUserView(CreateAPIView):
     permission_classes = (AllowAny, )
     serializer_class = UserSerializer
@@ -97,6 +99,35 @@ class CreateUserView(CreateAPIView):
             apellidos=alumno['last_name'],
             correo=alumno['email'],
             telefono=self.request.data['telefono'],
-            matricula=int(alumno['username']), 
+            matricula=int(alumno['username']),
             user=User.objects.get(id=alumno['id']))
         student.save()
+
+from rest_framework import parsers, renderers
+from rest_framework.authtoken.models import Token
+from rest_framework.authtoken.serializers import AuthTokenSerializer
+from rest_framework.views import APIView
+
+
+class ObtainAuthToken(APIView):
+    throttle_classes = ()
+    permission_classes = ()
+    parser_classes = (
+        parsers.FormParser, parsers.MultiPartParser, parsers.JSONParser,)
+    renderer_classes = (renderers.JSONRenderer,)
+    serializer_class = AuthTokenSerializer
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data['user']
+        token, created = Token.objects.get_or_create(user=user)
+        role = 'admin' if user.is_staff else 'user'
+        return Response({
+            'token': token.key,
+            'first_name': user.first_name,
+            'last_name': user.last_name,
+            'email': user.email,
+            'username': user.username,
+            'role': role
+        })
