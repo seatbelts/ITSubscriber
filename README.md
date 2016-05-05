@@ -38,11 +38,16 @@ DATABASES['default'] =  dj_database_url.config()
 
 - Correr migraciones y levantar servidor
 ```python
-$ python manage.py migrate
-$ python manage.py runserver	
+python manage.py migrate
+python manage.py runserver	
 ```
 
 # Crear superadmin
 ```python
 python manage.py createsuperuser
+```
+
+# Migrate heroku
+```python
+heroku run python manage.py migrate
 ```
