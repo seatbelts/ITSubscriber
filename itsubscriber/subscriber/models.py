@@ -15,13 +15,13 @@ class PersonalData(models.Model):
     nombre = models.CharField(max_length=255)
     apellidos = models.CharField(max_length=255)
     correo = models.EmailField()
-    telefono = models.CharField(max_length=20, null=True)
+    telefono = models.CharField(max_length=20, default='')
 
     class Meta:
         abstract = True
 
 
-class Evento(TimeStampedModel, models.Model ):
+class Evento(TimeStampedModel, models.Model):
     nombre = models.CharField(max_length=30)
     description = models.TextField(blank=True, null=True)
 
@@ -42,11 +42,13 @@ class Maestro(PersonalData):
     def __str__(self):
         return self.nombre
 
+
 class Categorias(models.Model):
     nombre = models.CharField(max_length=30)
 
     def __str__(self):
         return '%s' % self.nombre
+
 
 class Proyecto(models.Model):
     nombre = models.CharField(max_length=30)
@@ -63,6 +65,7 @@ class Proyecto(models.Model):
 
 class Alumno(PersonalData):
     matricula = models.PositiveIntegerField(primary_key=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return '%d - %s' % (self.matricula, self.nombre)

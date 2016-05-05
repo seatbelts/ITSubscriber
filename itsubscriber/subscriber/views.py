@@ -38,7 +38,6 @@ class ProyectoViewSet(ModelViewSet):
 class AlumnoViewSet(ModelViewSet):
     queryset = Alumno.objects.all()
     serializer_class = AlumnoSerializer
-    # authentication_classes = (TokenAuthentication, )
     permission_classes = (AlumnoPermission, )
 
 
@@ -64,9 +63,11 @@ class MaestroViewSet(ModelViewSet):
     queryset = Maestro.objects.all()
     serializer_class = MaestroSerializer
 
+
 class CategoriasViewSet(ModelViewSet):
     queryset = Categorias.objects.all()
     serializer_class = CategoriasSerializer
+
 
 class UserViewSet(ModelViewSet):
     serializer_class = UserSerializer
@@ -79,12 +80,23 @@ class UserViewSet(ModelViewSet):
 
 
 from rest_framework.generics import CreateAPIView
+from rest_framework.response import Response
 
 '''
 Endpoint to create new users
 '''
-
-
 class CreateUserView(CreateAPIView):
     permission_classes = (AllowAny, )
     serializer_class = UserSerializer
+
+    def perform_create(self, serializer):
+        serializer.save()
+        alumno = serializer.data
+        student = Alumno(
+            nombre=alumno['first_name'],
+            apellidos=alumno['last_name'],
+            correo=alumno['email'],
+            telefono=self.request.data['telefono'],
+            matricula=int(alumno['username']), 
+            user=User.objects.get(id=alumno['id']))
+        student.save()
