@@ -60,11 +60,13 @@ class MateriaViewSet(ModelViewSet):
 class MaestroViewSet(ModelViewSet):
     queryset = Maestro.objects.all()
     # serializer_class = MaestroSerializer
+
     def get_serializer_class(self):
         if self.action == 'list':
             return MaestroDataSerializer
         else:
             return MaestroSerializer
+
 
 class CategoriasViewSet(ModelViewSet):
     queryset = Categorias.objects.all()
@@ -131,5 +133,6 @@ class ObtainAuthToken(APIView):
             'last_name': user.last_name,
             'email': user.email,
             'username': user.username,
-            'role': role
+            'role': role,
+            'id': user.id
         })
