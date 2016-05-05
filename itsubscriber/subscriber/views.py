@@ -26,7 +26,6 @@ class EventoViewSet(ModelViewSet):
 
 class ProyectoViewSet(ModelViewSet):
     serializer_class = ProyectoSerializer
-    # authentication_classes = (TokenAuthentication, )
     permission_classes = (ProyectoPermission, )
 
     def get_queryset(self):
@@ -43,7 +42,6 @@ class AlumnoViewSet(ModelViewSet):
 
 class EquipoViewSet(ModelViewSet):
     serializer_class = EquipoSerializer
-    # authentication_classes = (TokenAuthentication, )
     permission_classes = (EquipoPermission, )
 
     def get_queryset(self):
@@ -61,8 +59,12 @@ class MateriaViewSet(ModelViewSet):
 
 class MaestroViewSet(ModelViewSet):
     queryset = Maestro.objects.all()
-    serializer_class = MaestroSerializer
-
+    # serializer_class = MaestroSerializer
+    def get_serializer_class(self):
+        if self.action == 'list':
+            return MaestroDataSerializer
+        else:
+            return MaestroSerializer
 
 class CategoriasViewSet(ModelViewSet):
     queryset = Categorias.objects.all()

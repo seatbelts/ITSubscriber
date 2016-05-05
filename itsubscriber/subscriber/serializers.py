@@ -33,6 +33,13 @@ class MaestroSerializer(serializers.HyperlinkedModelSerializer):
         model = Maestro
         fields = ('url', 'id', 'nombre', 'apellidos', 'correo', 'telefono', 'materia' )
 
+class MaestroDataSerializer(serializers.HyperlinkedModelSerializer):
+    materia = MateriaSerializer(read_only=True)
+
+    class Meta:
+        model = Maestro
+        fields = ('url', 'id', 'nombre', 'apellidos', 'correo', 'telefono', 'materia' )    
+
 class CategoriasSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Categorias
