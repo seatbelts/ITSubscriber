@@ -74,7 +74,7 @@ class Alumno(PersonalData):
 class Equipo(models.Model):
     nombre = models.CharField(max_length=30)
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
-    proyecto = models.OneToOneField(Proyecto)
+    proyecto = models.ForeignKey(Proyecto)
     lider = models.ForeignKey(Alumno, related_name='lider')
     integrantes = models.ManyToManyField(Alumno, related_name='integrantes')
 

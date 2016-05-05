@@ -14,7 +14,7 @@ class ProyectoPermission(permissions.BasePermission):
         return request.user.is_authenticated()
 
     def has_object_permission(self, request, view, obj):
-        return request.user.is_authenticated() and (obj.equipo.usuario == request.user or request.user.is_staff)
+        return request.user.is_authenticated()
 
 class AlumnoPermission(permissions.BasePermission):
     def has_permission(self, request, view):
