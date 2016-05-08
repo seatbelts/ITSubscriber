@@ -31,14 +31,7 @@ class MateriaSerializer(serializers.HyperlinkedModelSerializer):
 class MaestroSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Maestro
-        fields = ('url', 'id', 'nombre', 'apellidos', 'correo', 'telefono', 'materia' )
-
-class MaestroDataSerializer(serializers.HyperlinkedModelSerializer):
-    materia = MateriaSerializer(read_only=True)
-
-    class Meta:
-        model = Maestro
-        fields = ('url', 'id', 'nombre', 'apellidos', 'correo', 'telefono', 'materia' )    
+        fields = ('url', 'id', 'nombre', 'apellidos', 'correo', 'telefono', 'materia' )   
 
 class CategoriasSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -57,6 +50,19 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         model = User
         fields = ('username','password' ,'first_name', 'last_name', 'email', 'id')
 
+'''
+Second serializers
+'''
+class ProyectoDataSerializer(serializers.HyperlinkedModelSerializer):
+    materia = MateriaSerializer(read_only=True, many=True)
+    
+    class Meta:
+        model = Proyecto
+        fields = ('url', 'id', 'nombre', 'description', 'mesa', 'archivo', 'evento', 'categoria', 'materia',)
 
+class MaestroDataSerializer(serializers.HyperlinkedModelSerializer):
+    materia = MateriaSerializer(read_only=True)
 
-
+    class Meta:
+        model = Maestro
+        fields = ('url', 'id', 'nombre', 'apellidos', 'correo', 'telefono', 'materia' ) 
