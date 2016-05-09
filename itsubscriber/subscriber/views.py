@@ -35,7 +35,8 @@ class ProyectoViewSet(ModelViewSet):
     #     return Proyecto.objects.filter(equipo__usuario=self.request.user)
 
     def get_serializer_class(self):
-        if self.action == 'list':
+        print(self.action)
+        if self.action in ['list', 'retrieve']:
             return ProyectoDataSerializer
         else:
             return ProyectoSerializer

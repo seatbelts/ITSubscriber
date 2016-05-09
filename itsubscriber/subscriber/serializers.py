@@ -55,7 +55,8 @@ Second serializers
 '''
 class ProyectoDataSerializer(serializers.HyperlinkedModelSerializer):
     materia = MateriaSerializer(read_only=True, many=True)
-    
+    categoria = CategoriasSerializer(read_only=True)
+
     class Meta:
         model = Proyecto
         fields = ('url', 'id', 'nombre', 'description', 'mesa', 'archivo', 'evento', 'categoria', 'materia',)
