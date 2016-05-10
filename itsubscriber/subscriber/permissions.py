@@ -19,11 +19,11 @@ class ProyectoPermission(permissions.BasePermission):
 class AlumnoPermission(permissions.BasePermission):
     def has_permission(self, request, view):
         if view.action == 'list':
-            return request.user.is_authenticated() and request.user.is_staff
+            return request.user.is_authenticated()
         elif view.action in ['retrieve', 'create']:
             return request.user.is_authenticated()
         elif view.action in ['update', 'partial_update', 'destroy']:
-            return request.user.is_authenticated() and request.user.is_staff
+            return request.user.is_authenticated()
         else:
             return False
 
