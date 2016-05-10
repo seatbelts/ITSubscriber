@@ -23,16 +23,20 @@ class EventoViewSet(ModelViewSet):
     # authentication_classes = (TokenAuthentication, )
     permission_classes = (EventoPermission, )
 
-
+from pprint import pprint
 class ProyectoViewSet(ModelViewSet):
     queryset = Proyecto.objects.all()
     # serializer_class = ProyectoSerializer
     # permission_classes = (ProyectoPermission, )
 
     def get_queryset(self):
+        pprint(self.request.user.id)
         if self.request.user.is_staff:
             return Proyecto.objects.all()
-        return Proyecto.objects.filter(equipo__usuario=self.request.user)
+        elif self.request.user.is_authenticated():
+            return Proyecto.objects.filter(equipo__integrantes=self.request.user.username)
+        else:
+            return False 
 
     def get_serializer_class(self):
         if self.action in ['list', 'retrieve']:
