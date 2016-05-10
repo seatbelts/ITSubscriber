@@ -49,7 +49,12 @@ class Categorias(models.Model):
     def __str__(self):
         return '%s' % self.nombre
 
-
+'''
+Estatus
+1 - Pendiente
+2 - Rechazado
+3 - Aceptado 
+'''
 class Proyecto(models.Model):
     nombre = models.CharField(max_length=30)
     description = models.TextField(blank=True, null=True)
@@ -58,6 +63,7 @@ class Proyecto(models.Model):
     mesa = models.CharField(max_length=3, null=True)
     archivo = models.FileField(null=True, upload_to=file_name)
     categoria = models.ForeignKey(Categorias, on_delete=models.CASCADE, null=True)
+    estatus = models.IntegerField(default=1)
 
     def __str__(self):
         return '%s' % self.nombre

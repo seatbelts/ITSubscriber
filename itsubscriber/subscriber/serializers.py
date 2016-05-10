@@ -11,7 +11,7 @@ class EventoSerializer(serializers.HyperlinkedModelSerializer):
 class ProyectoSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Proyecto
-        fields = ('url', 'id', 'nombre', 'description', 'mesa', 'archivo', 'evento', 'categoria', 'materia',)
+        fields = ('url', 'id', 'nombre', 'description', 'mesa', 'archivo', 'evento', 'categoria', 'materia', 'estatus')
 
 class AlumnoSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -59,7 +59,7 @@ class ProyectoDataSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Proyecto
-        fields = ('url', 'id', 'nombre', 'description', 'mesa', 'archivo', 'evento', 'categoria', 'materia',)
+        fields = ('url', 'id', 'nombre', 'description', 'mesa', 'archivo', 'evento', 'categoria', 'materia', 'estatus')
 
 class MaestroDataSerializer(serializers.HyperlinkedModelSerializer):
     materia = MateriaSerializer(read_only=True)
