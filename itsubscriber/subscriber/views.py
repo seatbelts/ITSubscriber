@@ -29,10 +29,10 @@ class ProyectoViewSet(ModelViewSet):
     # serializer_class = ProyectoSerializer
     # permission_classes = (ProyectoPermission, )
 
-    # def get_queryset(self):
-    #     if self.request.user.is_staff:
-    #         return Proyecto.objects.all()
-    #     return Proyecto.objects.filter(equipo__usuario=self.request.user)
+    def get_queryset(self):
+        if self.request.user.is_staff:
+            return Proyecto.objects.all()
+        return Proyecto.objects.filter(equipo__usuario=self.request.user)
 
     def get_serializer_class(self):
         if self.action in ['list', 'retrieve']:
