@@ -34,9 +34,9 @@ class ProyectoViewSet(ModelViewSet):
         if self.request.user.is_staff:
             return Proyecto.objects.all()
         elif self.request.user.is_authenticated():
-            return Proyecto.objects.filter(equipo__integrantes=self.request.user.username)
+            return Proyecto.objects.filter(equipo__integrantes__user=self.request.user)
         else:
-            return False 
+            return False
 
     def get_serializer_class(self):
         if self.action in ['list', 'retrieve']:
@@ -57,19 +57,21 @@ class EquipoViewSet(ModelViewSet):
     def get_queryset(self):
         if self.request.user.is_staff:
             return Equipo.objects.all()
-        return Equipo.objects.filter(usuario=self.request.user)
+        #return Equipo.objects.filter(usuario=self.request.user) este usuario no sirve para nada creo, mejor filrar por integrantes
+        return Equipo.objects.filter(integrantes__user=self.request.user) or False
 
 
 class MateriaViewSet(ModelViewSet):
     queryset = Materia.objects.all()
     serializer_class = MateriaSerializer
     # authentication_classes = (TokenAuthentication, )
-    permission_classes = (MateriaPermission, )
+    permission_classes = (AdminWritePermission, )
 
 
 class MaestroViewSet(ModelViewSet):
     queryset = Maestro.objects.all()
     # serializer_class = MaestroSerializer
+    permission_classes = (AdminWritePermission, )
 
     def get_serializer_class(self):
         if self.action == 'list':
@@ -81,6 +83,7 @@ class MaestroViewSet(ModelViewSet):
 class CategoriasViewSet(ModelViewSet):
     queryset = Categorias.objects.all()
     serializer_class = CategoriasSerializer
+    permission_classes = (AdminWritePermission, )
 
 
 class UserViewSet(ModelViewSet):
