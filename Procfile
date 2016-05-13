@@ -1,1 +1,1 @@
-web: gunicorn --pythonpath itsubscriber ITSubscriber.wsgi  --log-file -
+web: gunicorn --pythonpath itsubscriber ITSubscriber.wsgi --access-logfile - --log-file -
